@@ -22,5 +22,10 @@ pipeline {
                 sh 'terraform validate'
             }
         }
+        stage('plan') {
+            steps {
+                sh 'terraform plan --out=test.out'
+            }
+        }
     }
 }
