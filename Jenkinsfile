@@ -1,15 +1,20 @@
 pipeline {
     agent {
-        docker { 
-            image 'hashicorp/terraform:light' 
+        docker {
+            image 'hashicorp/terraform:light'
             args '--entrypoint='
-            
+
         }
     }
     stages {
-        stage('Test') {
+        stage('Checkout') {
             steps {
-                sh 'terraform -v'
+                git 'https://github.com/bharathkkb/simple-terraform-gcp-example.git'
+            }
+        }
+        stage('validate') {
+            steps {
+                sh 'terraform validate'
             }
         }
     }
