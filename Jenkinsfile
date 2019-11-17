@@ -24,7 +24,7 @@ pipeline {
         }
         stage('plan') {
             steps {
-                sh 'terraform plan --out=test.out'
+                sh 'terraform plan -var project_id=${example_project_id} --out=test.out'
             }
         }
     }
