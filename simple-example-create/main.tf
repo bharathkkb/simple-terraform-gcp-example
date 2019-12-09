@@ -6,6 +6,14 @@ module "gcp-network" {
   version      = "~> 1.4.0"
   project_id   = var.project_id
   network_name = "test-vpc"
+
+  subnets = [
+    {
+      subnet_name   = "test-subnet"
+      subnet_ip     = "10.0.0.0/17"
+      subnet_region = "us-central1"
+    },
+  ]
 }
 resource "google_compute_instance" "example_vm" {
   project      = var.project_id
