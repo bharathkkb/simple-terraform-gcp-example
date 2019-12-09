@@ -1,1 +1,1 @@
-simple-example-create/variables.tf
+../simple-example-create/variables.tf

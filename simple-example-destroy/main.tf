@@ -1,1 +1,1 @@
-simple-example-create/main.tf
+../simple-example-create/main.tf

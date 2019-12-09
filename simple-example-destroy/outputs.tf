@@ -1,1 +1,1 @@
-simple-example-create/outputs.tf
+../simple-example-create/outputs.tf
