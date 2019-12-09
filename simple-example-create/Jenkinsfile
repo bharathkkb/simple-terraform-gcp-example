@@ -1,0 +1,42 @@
+pipeline {
+    agent {
+        label "terraform-exec"
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/bharathkkb/simple-terraform-gcp-example.git'
+                sh 'cd simple-example-create'
+            }
+        }
+        stage('TF init & validate') {
+            steps {
+                 container('terraform') {
+                sh 'terraform init'
+                sh 'terraform validate'
+                 }
+            }
+        }
+        stage('TF plan') {
+            steps {
+                 container('terraform') {
+                sh 'terraform plan -var project_id=test-project-174a --out=test.out'
+                 }
+            }
+        }
+            stage('Wait for Appproval') {
+      steps {
+        script {
+          def userInput = input(id: 'confirm', message: 'Apply Terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Apply terraform', name: 'confirm'] ])
+        }
+      }
+    }
+        stage('TF Apply') {
+      steps {
+        container('terraform') {
+          sh 'terraform apply -input=false test.out'
+        }
+      }
+    }
+    }
+}
