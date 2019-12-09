@@ -36,8 +36,8 @@ pipeline {
         stage('TF Destroy') {
       steps {
         container('terraform') {
-          sh 'cd simple-example-destroy
-          terraform destroy -auto-approve'''
+          sh '''cd simple-example-destroy
+          terraform destroy  -var project_id=test-project-174a -auto-approve'''
         }
       }
     }

@@ -1,6 +1,5 @@
 provider "google" {
   version = "~> 2.18.0"
-  project = var.project_id
 }
 module "gcp-network" {
   source       = "terraform-google-modules/network/google"
