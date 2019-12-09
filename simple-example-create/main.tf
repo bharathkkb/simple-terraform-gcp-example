@@ -31,3 +31,5 @@ resource "google_compute_instance" "example_vm" {
     }
   }
 }
+data "google_client_config" "default" {
+}
