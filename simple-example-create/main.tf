@@ -9,7 +9,7 @@ module "gcp-network" {
 
   subnets = [
     {
-      subnet_name   = "test-subnet"
+      subnet_name   = "test-sub"
       subnet_ip     = "10.0.0.0/17"
       subnet_region = "us-central1"
     },
@@ -21,7 +21,8 @@ resource "google_compute_instance" "example_vm" {
   name         = "example-vm"
   machine_type = "f1-micro"
   network_interface {
-    network = module.gcp-network.network_name
+    network    = module.gcp-network.network_name
+    subnetwork = module.gcp-network.subnets_names[0]
   }
   boot_disk {
     initialize_params {
