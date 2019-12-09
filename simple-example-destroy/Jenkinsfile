@@ -1,0 +1,45 @@
+pipeline {
+    agent {
+        label "terraform-exec"
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/bharathkkb/simple-terraform-gcp-example.git'
+                sh 'cd simple-example-destroy'
+            }
+        }
+        stage('TF init & validate') {
+            steps {
+                 container('terraform') {
+                sh 'cd simple-example-destroy'
+                sh 'terraform init'
+                sh 'terraform validate'
+                 }
+            }
+        }
+        stage('TF Destroy Plan') {
+            steps {
+                 container('terraform') {
+                   sh 'cd simple-example-destroy'
+                sh 'terraform plan -destroy -var project_id=test-project-174a'
+                 }
+            }
+        }
+            stage('Wait for Appproval') {
+      steps {
+        script {
+          def userInput = input(id: 'confirm', message: 'Destroy Terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Destroy terraform', name: 'confirm'] ])
+        }
+      }
+    }
+        stage('TF Destroy') {
+      steps {
+        container('terraform') {
+          sh 'cd simple-example-destroy'
+          sh 'terraform destroy -auto-approve'
+        }
+      }
+    }
+    }
+}
