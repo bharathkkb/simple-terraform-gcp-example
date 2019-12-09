@@ -22,7 +22,7 @@ resource "google_compute_instance" "example_vm" {
   machine_type = "f1-micro"
   network_interface {
     network    = module.gcp-network.network_name
-    subnetwork = module.gcp-network.subnets_names[0]
+    subnetwork = module.gcp-network.subnets_self_links[0]
   }
   boot_disk {
     initialize_params {
