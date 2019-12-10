@@ -6,23 +6,22 @@ pipeline {
         stage('Checkout') {
             steps {
                 git 'https://github.com/bharathkkb/simple-terraform-gcp-example.git'
-                sh 'cd simple-example-create'
             }
         }
         stage('TF init & validate') {
             steps {
                  container('terraform') {
-                sh 'cd simple-example-create'
-                sh 'terraform init'
-                sh 'terraform validate'
+                sh '''cd simple-example-create
+                terraform init
+                terraform validate'''
                  }
             }
         }
         stage('TF plan') {
             steps {
                  container('terraform') {
-                   sh 'cd simple-example-create'
-                sh 'terraform plan -var project_id=test-project-174a --out=test.out'
+                  sh '''cd simple-example-create
+                terraform plan -var project_id=test-project-174a --out=test.out'''
                  }
             }
         }
@@ -36,8 +35,8 @@ pipeline {
         stage('TF Apply') {
       steps {
         container('terraform') {
-          sh 'cd simple-example-create'
-          sh 'terraform apply -input=false test.out'
+          sh '''cd simple-example-create
+          terraform apply -input=false test.out'''
         }
       }
     }

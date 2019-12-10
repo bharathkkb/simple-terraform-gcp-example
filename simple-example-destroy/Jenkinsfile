@@ -6,7 +6,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 git 'https://github.com/bharathkkb/simple-terraform-gcp-example.git'
-                sh 'cd simple-example-destroy'
             }
         }
         stage('TF init & validate') {
