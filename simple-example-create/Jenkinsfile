@@ -21,7 +21,7 @@ pipeline {
             steps {
                  container('terraform') {
                   sh '''cd simple-example-create
-                terraform plan -var project_id=test-project-174a --out=test.out'''
+                terraform plan -var project_id=test-proj-cicd-c496 --out=test.out'''
                  }
             }
         }
