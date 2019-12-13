@@ -18,7 +18,7 @@ module "gcp-network" {
 resource "google_compute_instance" "example_vm" {
   project      = var.project_id
   zone         = "us-central1-a"
-  name         = "example-vm-5"
+  name         = "example-vm-6"
   machine_type = "f1-micro"
   network_interface {
     network    = module.gcp-network.network_name
