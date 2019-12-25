@@ -3,11 +3,6 @@ pipeline {
         label "terraform-exec"
     }
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/bharathkkb/simple-terraform-gcp-example.git'
-            }
-        }
         stage('TF init & validate') {
             steps {
                  container('terraform') {
