@@ -21,7 +21,7 @@ pipeline {
             steps {
                  container('terraform') {
                    sh '''cd simple-example-destroy
-                terraform plan -destroy -var project_id=test-proj-cicd-c496'''
+                terraform plan -destroy -var project_id=$PROJECT_ID'''
                  }
             }
         }

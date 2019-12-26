@@ -3,11 +3,6 @@ pipeline {
         label "terraform-exec"
     }
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/bharathkkb/simple-terraform-gcp-example.git'
-            }
-        }
         stage('TF init & validate') {
             steps {
                  container('terraform') {
@@ -21,7 +16,7 @@ pipeline {
             steps {
                  container('terraform') {
                   sh '''cd simple-example-create
-                terraform plan -var project_id=test-proj-cicd-c496 --out=test.out'''
+                terraform plan -var project_id=$PROJECT_ID --out=test.out'''
                  }
             }
         }

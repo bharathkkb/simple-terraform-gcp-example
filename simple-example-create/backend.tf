@@ -1,5 +1,5 @@
 terraform {
   backend "gcs" {
-    bucket = "test-proj-tfstate"
+    bucket = "jenkins-test-pipeline-tfstate-r8ov1"
   }
 }
