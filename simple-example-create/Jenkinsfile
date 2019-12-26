@@ -33,7 +33,7 @@ pipeline {
       steps {
         container('terraform') {
           sh '''cd simple-example-create
-          terraform apply -input=false test.out'''
+          terraform apply -var project_id=$PROJECT_ID -input=false test.out'''
         }
       }
     }
